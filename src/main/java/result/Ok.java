@@ -1,6 +1,6 @@
 package result;
 
-public final class Ok<T> extends Result {
+public final class Ok<T, E> extends Result<T, E> {
     public Ok(T ok) {
         super(ok, null);
     }
@@ -12,6 +12,6 @@ public final class Ok<T> extends Result {
 
     @Override
     public boolean isErr() {
-        return true;
+        return false;
     }
 }
