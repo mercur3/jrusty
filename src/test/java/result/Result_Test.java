@@ -19,4 +19,17 @@ class Result_Test {
         assertEquals(x.unwrap(), str);
         assertEquals(x.unwrapOr(""), str);
     }
+
+    @Test
+    void err_path_works() {
+        var str = "Some error type";
+        var x = new Err<String, Integer>(str);
+
+        assertFalse(x.isOk());
+        assertTrue(x.isErr());
+        assertEquals(x.ok(), Optional.empty());
+        assertEquals(x.err(), Optional.of(str));
+        assertThrows(IllegalStateException.class, x::unwrap);
+        assertEquals(x.unwrapOr(1), 1);
+    }
 }
