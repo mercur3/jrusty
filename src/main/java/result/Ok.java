@@ -2,6 +2,12 @@ package result;
 
 import java.util.Objects;
 
+/**
+ * If operation is successful it must return <code>Ok<T></code>.
+ * <br><br>
+ * <b>Note:</b> neglect the signature <code><T, E></code>. Only <code>T</code> is used,
+ * <code>E</code> is needed only in order to compile without warnings.
+ */
 public final class Ok<T, E> extends Result<T, E> {
 	public Ok(T ok) {
 		super(ok, null);
