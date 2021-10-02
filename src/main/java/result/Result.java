@@ -1,6 +1,7 @@
 package result;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 public sealed abstract class Result<T, E> permits Ok, Err {
     private final T ok;
@@ -33,6 +34,13 @@ public sealed abstract class Result<T, E> permits Ok, Err {
     public T unwrapOr(T other) {
         if (isErr()) {
             return other;
+        }
+        return ok;
+    }
+
+    public T unwrapOrElse(Function<E, T> mapper) {
+        if (isErr()) {
+            return mapper.apply(err);
         }
         return ok;
     }
