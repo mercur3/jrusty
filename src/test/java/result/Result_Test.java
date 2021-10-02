@@ -54,6 +54,12 @@ class Result_Test {
         assertEquals(err.unwrapOr(1), 1);
     }
 
+    @Test
+    void null_not_allowed() {
+        assertThrows(NullPointerException.class, () -> new Ok<>(null));
+        assertThrows(NullPointerException.class, () -> new Err<>(null));
+    }
+
 
 
     /*     PRIVATE     */
