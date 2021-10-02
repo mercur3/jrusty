@@ -9,6 +9,9 @@ import java.util.Objects;
  * <code>E</code> is needed only in order to compile without warnings.
  */
 public final class Ok<T, E> extends Result<T, E> {
+	/**
+	 * @throws NullPointerException if <code>null</code>
+	 */
 	public Ok(T ok) {
 		super(ok, null);
 		Objects.requireNonNull(ok);

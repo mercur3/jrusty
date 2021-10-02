@@ -19,6 +19,9 @@ import java.util.Objects;
  * </ul>
  */
 public final class Err<E, T> extends Result<T, E> {
+	/**
+	 * @throws NullPointerException if <code>null</code>
+	 */
 	public Err(E err) {
 		super(null, err);
 		Objects.requireNonNull(err);

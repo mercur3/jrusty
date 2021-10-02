@@ -5,7 +5,9 @@ import java.util.function.Function;
 
 /**
  * Representation of Rust's <code>std::result::Result</code>. The only allowed subclasses are
- * <code>Ok</code> and <code>Err</code>
+ * <code>Ok</code> and <code>Err</code>. If the instance is <code>Ok</code>, <code>err</code> is set
+ * to <code>null</code>. If the instance is <code>Err</code>, <code>ok</code> is set to
+ * <code>null</code>.
  *
  * @param <T> the type operation returns if it is <code>Ok</code>
  * @param <E> the type operation returns if it is <code>Err</code>
