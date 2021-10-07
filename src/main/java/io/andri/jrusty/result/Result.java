@@ -1,4 +1,4 @@
-package result;
+package io.andri.jrusty.result;
 
 import java.util.Optional;
 import java.util.function.Function;

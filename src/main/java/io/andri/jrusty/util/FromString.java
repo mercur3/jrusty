@@ -1,8 +1,8 @@
-package util;
+package io.andri.jrusty.util;
 
-import result.Err;
-import result.Ok;
-import result.Result;
+import io.andri.jrusty.result.Err;
+import io.andri.jrusty.result.Ok;
+import io.andri.jrusty.result.Result;
 
 public class FromString {
 	private static final String ERROR_MESSAGE = "Cannot be parsed";

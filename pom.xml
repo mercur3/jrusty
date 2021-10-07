@@ -5,8 +5,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.andri</groupId>
-	<artifactId>rusty</artifactId>
-	<version>0.1</version>
+	<artifactId>jrusty</artifactId>
+	<version>1.1</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
