@@ -1,0 +1,18 @@
+* jrusty
+What if Java was more like Rust?
+
+** What this library provides
+- Add a =Result= type following the specification of Rust's =std::result::Result= with 1 of the
+  2 possible types: =Ok= or =Err=.
+- Sane conversions from =java.lang.String= to =byte=, =int=, =long= without the need for:
+
+  #+begin_src java
+    try {
+        /* assignment */ Integer.parseInt(someQuestionableStringWeGotAsInput);
+    }
+    catch (NumberFormatException ex) {
+        // do something
+    }
+  #+end_src
+
+- =null= safety for everything library provides.
