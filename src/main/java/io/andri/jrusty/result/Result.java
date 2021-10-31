@@ -51,6 +51,18 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
+	 * Converts a <code>Result<Result<T, E>, E></code> to <code>Result<T, E></code>. Flattening
+	 * removes only one level. If it cannot be further flatten, this function returns
+	 * <code>this</code>.
+	 */
+	public Result<T, E> flatten() {
+		if (ok instanceof Result<?, ?> innerRes) {
+			return (Result<T, E>) innerRes;
+		}
+		return this;
+	}
+
+	/**
 	 * Maps a <code>Result<T, E></code> to <code>Result<T, E></code> by applying the function. In
 	 * any case the value of <code>err</code> is left untouched.
 	 *

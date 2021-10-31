@@ -91,4 +91,20 @@ class Result_Test {
 		assertThrows(NullPointerException.class, () -> new Ok<>(null));
 		assertThrows(NullPointerException.class, () -> new Err<>(null));
 	}
+
+	@Test
+	void flatten_works() {
+		Result<Result<String, Integer>, Integer> res1 = new Ok<>(new Ok<>("hello"));
+		assertEquals(res1.flatten(), new Ok<>("hello"));
+
+		Result<Result<String, Integer>, Integer> res2 = new Ok<>(new Err<>(6));
+		assertEquals(res2.flatten(), new Err<>(6));
+
+		Result<Result<String, Integer>, Integer> res3 = new Err<>(6);
+		assertEquals(res3.flatten(), new Err<>(6));
+
+		Result<Result<Result<String, Integer>, Integer>, Integer> res4 = new Ok<>(new Ok<>(new Ok<>("hello")));
+		assertEquals(res4.flatten(), new Ok<>(new Ok<>("hello")));
+		assertEquals(res4.flatten().flatten(), new Ok<>("hello"));
+	}
 }
