@@ -9,7 +9,7 @@ import java.util.function.Function;
  * to <code>null</code>. If the instance is <code>Err</code>, <code>ok</code> is set to
  * <code>null</code>.
  * <p>
- * 2 <code>Result</code>'s are equal if and only if:
+ * 2 <code>Result</code>'s are equal if and only if one of the following is true:
  * <ol>
  *     <li>Both are <code>Ok<?></code> and the content inside are also equal</li>
  *     <li>Both are <code>Err<?></code> and the content inside are also equal</li>
