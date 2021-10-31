@@ -34,6 +34,17 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
+	 * If <code>ok</code> return the value, else throw a <code>RuntimeException</code> with the
+	 * specific message.
+	 */
+	public T expect(String msg) {
+		if (isOk()) {
+			return ok;
+		}
+		throw new RuntimeException(msg);
+	}
+
+	/**
 	 * @return associated type <code>T</code> if <code>Ok</code> or throws
 	 * <code>IllegalStateException</code> if <code>Err</code>.
 	 */

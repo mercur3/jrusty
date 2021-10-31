@@ -7,7 +7,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Result_Test {
-	private static final String ERROR_MESSAGE = "It cannot be parsed";
+	private static final String ERROR_MESSAGE = "An error has occurred";
 
 	private static Result<Integer, String> __parseInt(String str) {
 		try {
@@ -40,6 +40,7 @@ class Result_Test {
 		assertEquals(x.ok(), Optional.of(str));
 		assertEquals(x.err(), Optional.empty());
 		assertEquals(x.unwrap(), str);
+		assertEquals(x.expect(ERROR_MESSAGE), str);
 		assertEquals(x.unwrapOr(""), str);
 		assertEquals(x.unwrapOrElse(Result_Test::__toString), str);
 	}
@@ -54,6 +55,7 @@ class Result_Test {
 		assertEquals(x.ok(), Optional.empty());
 		assertEquals(x.err(), Optional.of(str));
 		assertThrows(IllegalStateException.class, x::unwrap);
+		assertThrows(RuntimeException.class, () -> x.expect(ERROR_MESSAGE));
 		assertEquals(x.unwrapOr(1), 1);
 		assertEquals(x.unwrapOrElse(Result_Test::__length), str.length());
 	}
@@ -69,13 +71,15 @@ class Result_Test {
 		assertEquals(ok.ok(), Optional.of(num));
 		assertEquals(ok.err(), Optional.empty());
 		assertEquals(ok.unwrap(), num);
+		assertEquals(ok.expect(ERROR_MESSAGE), num);
 		assertEquals(ok.unwrapOr(0), num);
 		assertEquals(ok.unwrapOrElse(Result_Test::__length), num);
 
 		assertFalse(err.isOk());
 		assertTrue(err.isErr());
 		assertEquals(err.ok(), Optional.empty());
-		assertEquals(err.err(), Optional.of("It cannot be parsed"));
+		assertEquals(err.err(), Optional.of("An error has occurred"));
+		assertThrows(RuntimeException.class, () -> err.expect(ERROR_MESSAGE));
 		assertThrows(IllegalStateException.class, err::unwrap);
 		assertEquals(err.unwrapOr(1), 1);
 		assertEquals(err.unwrapOrElse(Result_Test::__length), ERROR_MESSAGE.length());
