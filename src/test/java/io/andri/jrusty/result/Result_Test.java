@@ -41,9 +41,12 @@ class Result_Test {
 		assertEquals(x.unwrapOr(""), str);
 		assertEquals(x.unwrapOrElse(Result_Test::__toString), str);
 
-		var res = x.map(ok -> 1);
-		assertEquals(res.unwrap(), 1);
-		assertEquals(res.err(), x.err());
+		var okMapping = x.map(ok -> 1);
+		assertEquals(okMapping.unwrap(), 1);
+		assertEquals(okMapping.err(), x.err());
+
+		var errMapping = x.mapErr(err -> ResultType.FORMAT_ERROR);
+		assertEquals(errMapping.unwrap(), x.unwrap());
 	}
 
 	@Test
@@ -60,9 +63,13 @@ class Result_Test {
 		assertEquals(x.unwrapOr(1), 1);
 		assertEquals(x.unwrapOrElse(Result_Test::__length), str.length());
 
-		var res = x.map(ok -> "");
-		assertFalse(res.isOk());
-		assertEquals(res.err(), x.err());
+		var okMapping = x.map(ok -> "");
+		assertFalse(okMapping.isOk());
+		assertEquals(okMapping.err(), x.err());
+
+		var errMapping = x.mapErr(err -> ResultType.EMPTY);
+		assertTrue(errMapping.isErr());
+		assertEquals(errMapping.err(), Optional.of(ResultType.EMPTY));
 	}
 
 	@Test

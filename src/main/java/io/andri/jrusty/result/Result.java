@@ -49,13 +49,27 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	 * any case the value of <code>err</code> is left untouched.
 	 *
 	 * @param mapper a function <code>T -> U</code>
-	 * @param <U>    the new type
+	 * @param <U>    the new <code>ok</code> type
 	 */
 	public <U> Result<U, E> map(Function<T, U> mapper) {
 		if (isOk()) {
 			return new Ok<>(mapper.apply(ok));
 		}
 		return new Err<>(err);
+	}
+
+	/**
+	 * Maps a <code>Result<T, E></code> to <code>Result<T, O></code> by applying the function. In
+	 * any case the value of <code>ok</code> is left untouched.
+	 *
+	 * @param mapper a function <code>E -> O</code>
+	 * @param <O>    the new <code>err</code> type
+	 */
+	public <O> Result<T, O> mapErr(Function<E, O> mapper) {
+		if (isErr()) {
+			return new Err<>(mapper.apply(err));
+		}
+		return new Ok<>(ok);
 	}
 
 	/**
