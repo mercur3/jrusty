@@ -27,9 +27,6 @@ class Result_Test {
 	}
 
 
-
-	/*     PRIVATE     */
-
 	@Test
 	void ok_path_works() {
 		var str = "Hello, world!";
@@ -39,10 +36,14 @@ class Result_Test {
 		assertFalse(x.isErr());
 		assertEquals(x.ok(), Optional.of(str));
 		assertEquals(x.err(), Optional.empty());
-		assertEquals(x.unwrap(), str);
 		assertEquals(x.expect(ERROR_MESSAGE), str);
+		assertEquals(x.unwrap(), str);
 		assertEquals(x.unwrapOr(""), str);
 		assertEquals(x.unwrapOrElse(Result_Test::__toString), str);
+
+		var res = x.map(ok -> 1);
+		assertEquals(res.unwrap(), 1);
+		assertEquals(res.err(), x.err());
 	}
 
 	@Test
@@ -58,6 +59,10 @@ class Result_Test {
 		assertThrows(RuntimeException.class, () -> x.expect(ERROR_MESSAGE));
 		assertEquals(x.unwrapOr(1), 1);
 		assertEquals(x.unwrapOrElse(Result_Test::__length), str.length());
+
+		var res = x.map(ok -> "");
+		assertFalse(res.isOk());
+		assertEquals(res.err(), x.err());
 	}
 
 	@Test

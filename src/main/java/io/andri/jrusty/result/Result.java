@@ -45,6 +45,20 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
+	 * Maps a <code>Result<T, E></code> to <code>Result<T, E></code> by applying the function. In
+	 * any case the value of <code>err</code> is left untouched.
+	 *
+	 * @param mapper a function <code>T -> U</code>
+	 * @param <U>    the new type
+	 */
+	public <U> Result<U, E> map(Function<T, U> mapper) {
+		if (isOk()) {
+			return new Ok<>(mapper.apply(ok));
+		}
+		return new Err<>(err);
+	}
+
+	/**
 	 * @return associated type <code>T</code> if <code>Ok</code> or throws
 	 * <code>IllegalStateException</code> if <code>Err</code>.
 	 */
@@ -75,5 +89,16 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 			return mapper.apply(err);
 		}
 		return ok;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o instanceof Result<?, ?> other) {
+			return ok().equals(other.ok()) && err().equals(other.err());
+		}
+		return false;
 	}
 }
