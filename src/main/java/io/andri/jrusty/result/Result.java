@@ -8,6 +8,12 @@ import java.util.function.Function;
  * <code>Ok</code> and <code>Err</code>. If the instance is <code>Ok</code>, <code>err</code> is set
  * to <code>null</code>. If the instance is <code>Err</code>, <code>ok</code> is set to
  * <code>null</code>.
+ * <p>
+ * 2 <code>Result</code>'s are equal if and only if:
+ * <ol>
+ *     <li>Both are <code>Ok<?></code> and the content inside are also equal</li>
+ *     <li>Both are <code>Err<?></code> and the content inside are also equal</li>
+ * </ol>
  *
  * @param <T> the type operation returns if it is <code>Ok</code>
  * @param <E> the type operation returns if it is <code>Err</code>
@@ -103,16 +109,5 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 			return mapper.apply(err);
 		}
 		return ok;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o instanceof Result<?, ?> other) {
-			return ok().equals(other.ok()) && err().equals(other.err());
-		}
-		return false;
 	}
 }

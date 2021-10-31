@@ -26,4 +26,12 @@ public final class Ok<T, E> extends Result<T, E> {
 	public boolean isErr() {
 		return false;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Ok<?, ?> other) {
+			return ok().equals(other.ok());
+		}
+		return false;
+	}
 }

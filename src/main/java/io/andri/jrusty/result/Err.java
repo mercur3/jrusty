@@ -36,4 +36,12 @@ public final class Err<E, T> extends Result<T, E> {
 	public boolean isErr() {
 		return true;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Err<?, ?> other) {
+			return err().equals(other.err());
+		}
+		return false;
+	}
 }

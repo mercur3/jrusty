@@ -37,16 +37,11 @@ class Result_Test {
 		assertEquals(x.ok(), Optional.of(str));
 		assertEquals(x.err(), Optional.empty());
 		assertEquals(x.expect(ERROR_MESSAGE), str);
+		assertEquals(x.map(ok -> 1), new Ok<>(1));
+		assertEquals(x.mapErr(err -> ResultType.FORMAT_ERROR), new Ok<>(str));
 		assertEquals(x.unwrap(), str);
 		assertEquals(x.unwrapOr(""), str);
 		assertEquals(x.unwrapOrElse(Result_Test::__toString), str);
-
-		var okMapping = x.map(ok -> 1);
-		assertEquals(okMapping.unwrap(), 1);
-		assertEquals(okMapping.err(), x.err());
-
-		var errMapping = x.mapErr(err -> ResultType.FORMAT_ERROR);
-		assertEquals(errMapping.unwrap(), x.unwrap());
 	}
 
 	@Test
@@ -60,16 +55,10 @@ class Result_Test {
 		assertEquals(x.err(), Optional.of(str));
 		assertThrows(IllegalStateException.class, x::unwrap);
 		assertThrows(RuntimeException.class, () -> x.expect(ERROR_MESSAGE));
+		assertEquals(x.map(ok -> ""), new Err<>(str));
+		assertEquals(x.mapErr(err -> ResultType.EMPTY), new Err<>(ResultType.EMPTY));
 		assertEquals(x.unwrapOr(1), 1);
 		assertEquals(x.unwrapOrElse(Result_Test::__length), str.length());
-
-		var okMapping = x.map(ok -> "");
-		assertFalse(okMapping.isOk());
-		assertEquals(okMapping.err(), x.err());
-
-		var errMapping = x.mapErr(err -> ResultType.EMPTY);
-		assertTrue(errMapping.isErr());
-		assertEquals(errMapping.err(), Optional.of(ResultType.EMPTY));
 	}
 
 	@Test
