@@ -6,7 +6,7 @@
 
 	<groupId>io.andri</groupId>
 	<artifactId>jrusty</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 	<dependencies>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
