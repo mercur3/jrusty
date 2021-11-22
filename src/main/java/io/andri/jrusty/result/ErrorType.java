@@ -1,6 +1,6 @@
 package io.andri.jrusty.result;
 
-public enum ResultType {
+public enum ErrorType {
 	EMPTY,
 	IO_ERROR,
 	FORMAT_ERROR,

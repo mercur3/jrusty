@@ -38,7 +38,7 @@ class Result_Test {
 		assertEquals(x.err(), Optional.empty());
 		assertEquals(x.expect(ERROR_MESSAGE), str);
 		assertEquals(x.map(ok -> 1), new Ok<>(1));
-		assertEquals(x.mapErr(err -> ResultType.FORMAT_ERROR), new Ok<>(str));
+		assertEquals(x.mapErr(err -> ErrorType.FORMAT_ERROR), new Ok<>(str));
 		assertEquals(x.unwrap(), str);
 		assertEquals(x.unwrapOr(""), str);
 		assertEquals(x.unwrapOrElse(Result_Test::__toString), str);
@@ -56,7 +56,7 @@ class Result_Test {
 		assertThrows(IllegalStateException.class, x::unwrap);
 		assertThrows(RuntimeException.class, () -> x.expect(ERROR_MESSAGE));
 		assertEquals(x.map(ok -> ""), new Err<>(str));
-		assertEquals(x.mapErr(err -> ResultType.EMPTY), new Err<>(ResultType.EMPTY));
+		assertEquals(x.mapErr(err -> ErrorType.EMPTY), new Err<>(ErrorType.EMPTY));
 		assertEquals(x.unwrapOr(1), 1);
 		assertEquals(x.unwrapOrElse(Result_Test::__length), str.length());
 	}
