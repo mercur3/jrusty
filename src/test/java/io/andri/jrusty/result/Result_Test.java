@@ -103,7 +103,8 @@ class Result_Test {
 		Result<Result<String, Integer>, Integer> res3 = new Err<>(6);
 		assertEquals(res3.flatten(), new Err<>(6));
 
-		Result<Result<Result<String, Integer>, Integer>, Integer> res4 = new Ok<>(new Ok<>(new Ok<>("hello")));
+		Result<Result<Result<String, Integer>, Integer>, Integer> res4 = new Ok<>(new Ok<>(new Ok<>(
+				"hello")));
 		assertEquals(res4.flatten(), new Ok<>(new Ok<>("hello")));
 		assertEquals(res4.flatten().flatten(), new Ok<>("hello"));
 	}
