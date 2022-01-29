@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Result_Test {
 	private static final String ERROR_MESSAGE = "An error has occurred";
+	private static final int DEFAULT_ERR_INT = -1;
 
 	private static Result<Integer, String> __parseInt(String str) {
 		try {
@@ -39,6 +40,8 @@ class Result_Test {
 		assertEquals(x.expect(ERROR_MESSAGE), str);
 		assertEquals(x.map(ok -> 1), new Ok<>(1));
 		assertEquals(x.mapErr(err -> ErrorKind.FORMAT_ERROR), new Ok<>(str));
+		assertEquals(x.mapOr(-1, String::length), str.length());
+		assertEquals(x.mapOrElse((err -> -1), String::length), str.length());
 		assertEquals(x.unwrap(), str);
 		assertEquals(x.unwrapOr(""), str);
 		assertEquals(x.unwrapOrElse(Result_Test::__toString), str);
@@ -47,6 +50,7 @@ class Result_Test {
 	@Test
 	void err_path_works() {
 		var str = "Some error type";
+		var isErr = "Is err";
 		var x = new Err<String, Integer>(str);
 
 		assertFalse(x.isOk());
@@ -57,6 +61,8 @@ class Result_Test {
 		assertThrows(RuntimeException.class, () -> x.expect(ERROR_MESSAGE));
 		assertEquals(x.map(ok -> ""), new Err<>(str));
 		assertEquals(x.mapErr(err -> ErrorKind.EMPTY), new Err<>(ErrorKind.EMPTY));
+		assertEquals(x.mapOr(isErr, String::valueOf), isErr);
+		assertEquals(x.mapOrElse(this::strToDefaultInt, ok -> ok), -1);
 		assertEquals(x.unwrapOr(1), 1);
 		assertEquals(x.unwrapOrElse(Result_Test::__length), str.length());
 	}
@@ -107,5 +113,9 @@ class Result_Test {
 				"hello")));
 		assertEquals(res4.flatten(), new Ok<>(new Ok<>("hello")));
 		assertEquals(res4.flatten().flatten(), new Ok<>("hello"));
+	}
+
+	private int strToDefaultInt(String str) {
+		return DEFAULT_ERR_INT;
 	}
 }

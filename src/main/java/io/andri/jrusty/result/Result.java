@@ -80,14 +80,41 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	 * Maps a <code>Result<T, E></code> to <code>Result<T, O></code> by applying the function. In
 	 * any case the value of <code>ok</code> is left untouched.
 	 *
-	 * @param mapper a function <code>E -> O</code>
-	 * @param <O>    the new <code>err</code> type
+	 * @param f   a function <code>E -> O</code>
+	 * @param <O> the new <code>err</code> type
 	 */
-	public <O> Result<T, O> mapErr(Function<E, O> mapper) {
+	public <O> Result<T, O> mapErr(Function<E, O> f) {
 		if (isErr()) {
-			return new Err<>(mapper.apply(err));
+			return new Err<>(f.apply(err));
 		}
 		return new Ok<>(ok);
+	}
+
+	/**
+	 * Maps a <code>Result<T, E></code> to <code>U</code> by applying the function <code>f</code>
+	 * to a present <code>Ok</code> value or the default function <code>defaultFunc</code> to a
+	 * present <code>Err</code> value
+	 *
+	 * @param defaultFunc a function <code>E -> U</code>
+	 * @param f           a function <code>T -> U</code>
+	 * @param <U>         the new <code>err</code> type
+	 */
+	public <U> U mapOrElse(Function<E, U> defaultFunc, Function<T, U> f) {
+		if (isOk()) {
+			return f.apply(ok);
+		}
+		return defaultFunc.apply(err);
+	}
+
+	/**
+	 * @return the default value of type <code>U</code> if <code>Err</code>, applies the function
+	 * <code>f</code>
+	 */
+	public <U> U mapOr(U defaultValue, Function<T, U> f) {
+		if (isOk()) {
+			return f.apply(ok);
+		}
+		return defaultValue;
 	}
 
 	/**
