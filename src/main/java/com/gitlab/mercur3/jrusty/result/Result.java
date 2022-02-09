@@ -1,4 +1,4 @@
-package io.andri.jrusty.result;
+package com.gitlab.mercur3.jrusty.result;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -11,8 +11,8 @@ import java.util.function.Function;
  * <p>
  * 2 <code>Result</code>'s are equal if and only if one of the following is true:
  * <ol>
- *     <li>Both are <code>Ok<?></code> and the content inside are also equal</li>
- *     <li>Both are <code>Err<?></code> and the content inside are also equal</li>
+ *     <li>Both are <code>Ok&lt;?&gt;</code> and the content inside are also equal</li>
+ *     <li>Both are <code>Err&lt;?&gt;</code> and the content inside are also equal</li>
  * </ol>
  *
  * @param <T> the type operation returns if it is <code>Ok</code>
@@ -27,8 +27,14 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 		this.err = err;
 	}
 
+	/**
+	 * @return <code>true</code> if <code>Ok</code>, <code>false</code> if <code>Err</code>
+	 */
 	public abstract boolean isOk();
 
+	/**
+	 * @return <code>false</code> if <code>Ok</code>, <code>true</code> if <code>Err</code>
+	 */
 	public abstract boolean isErr();
 
 	public Optional<T> ok() {
@@ -40,6 +46,7 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
+	 * @param msg message
 	 * @return the value if <code>Ok</code>
 	 * @throws RuntimeException with the specific message if <code>Err</code>
 	 */
@@ -51,9 +58,12 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
-	 * Converts a <code>Result<Result<T, E>, E></code> to <code>Result<T, E></code>. Flattening
-	 * removes only one level. If it cannot be further flatten, this function returns
+	 * Converts a <code>Result&lt;Result&lt;T, E&gt;, E&gt;</code> to
+	 * <code>Result&lt;T, E&gt;</code>. Flattening removes only one level. If it cannot be
+	 * further flatten, this function returns
 	 * <code>this</code>.
+	 *
+	 * @return flattening result
 	 */
 	public Result<T, E> flatten() {
 		if (ok instanceof Result<?, ?> innerRes) {
@@ -63,11 +73,12 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
-	 * Maps a <code>Result<T, E></code> to <code>Result<T, E></code> by applying the function. In
-	 * any case the value of <code>err</code> is left untouched.
+	 * Maps a <code>Result&lt;T, E&gt;</code> to <code>Result&lt;T, E&gt;</code> by applying the
+	 * function. In any case the value of <code>err</code> is left untouched.
 	 *
 	 * @param mapper a function <code>T -> U</code>
 	 * @param <U>    the new <code>ok</code> type
+	 * @return mapping result
 	 */
 	public <U> Result<U, E> map(Function<T, U> mapper) {
 		if (isOk()) {
@@ -77,8 +88,8 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
-	 * Maps a <code>Result<T, E></code> to <code>Result<T, O></code> by applying the function. In
-	 * any case the value of <code>ok</code> is left untouched.
+	 * Maps a <code>Result&lt;T, E&gt;</code> to <code>Result&lt;T, O&gt;</code> by applying the
+	 * function. In any case the value of <code>ok</code> is left untouched.
 	 *
 	 * @param f   a function <code>E -> O</code>
 	 * @param <O> the new <code>err</code> type
@@ -91,13 +102,14 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
-	 * Maps a <code>Result<T, E></code> to <code>U</code> by applying the function <code>f</code>
-	 * to a present <code>Ok</code> value or the default function <code>defaultFunc</code> to a
-	 * present <code>Err</code> value
+	 * Maps a <code>Result&lt;T, E&gt;</code> to <code>U</code> by applying the function
+	 * <code>f</code> to a present <code>Ok</code> value or the default function
+	 * <code>defaultFunc</code> to a present <code>Err</code> value
 	 *
 	 * @param defaultFunc a function <code>E -> U</code>
 	 * @param f           a function <code>T -> U</code>
 	 * @param <U>         the new <code>err</code> type
+	 * @return mapping result
 	 */
 	public <U> U mapOrElse(Function<E, U> defaultFunc, Function<T, U> f) {
 		if (isOk()) {
@@ -107,6 +119,9 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
+	 * @param <U>          the associated type
+	 * @param defaultValue the default value
+	 * @param f            the function
 	 * @return the default value of type <code>U</code> if <code>Err</code>, applies the function
 	 * <code>f</code>
 	 */
@@ -129,6 +144,7 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
+	 * @param other the return value if <code>Err</code>
 	 * @return associated type <code>T</code> if <code>Ok</code> or <code>other</code> if
 	 * <code>Err</code>.
 	 */
@@ -140,6 +156,7 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
+	 * @param mapper a function
 	 * @return associated type <code>T</code> if <code>Ok</code> or if <code>Err</code>, the
 	 * mapping of associated type <code>E</code> to <code>T</code>
 	 */

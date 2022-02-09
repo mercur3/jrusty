@@ -1,18 +1,19 @@
-package io.andri.jrusty.result;
+package com.gitlab.mercur3.jrusty.result;
 
 import java.util.Objects;
 
 /**
- * If the operation is not successful it must return <code>Err<E></code>.
+ * If the operation is not successful it must return <code>Err&lt;E&gt;</code>.
  * <br><br>
  * <b>Notes:</b>
  * <ul>
  *     <li>
- * 			neglect the signature <code><T, E></code>. Only <code>T</code> is used, <code>E</code>
+ * 			neglect the signature <code>&lt;T, E&gt;</code>. Only <code>T</code> is used,
+ * 			<code>E</code>
  * 			is needed only in order to compile without warnings.
  *     </li>
  *     <li>
- * 			<code>Err<E, T></code> is a HACK in order to circumnavigate the problem that the
+ * 			<code>Err&lt;E, T&lt;</code> is a HACK in order to circumnavigate the problem that the
  * 			constructor accepts only 1 parameter therefore it is assigned to <code>T</code> rather
  * 			than <code>E</code> which is what we want.
  *     </li>
@@ -20,6 +21,7 @@ import java.util.Objects;
  */
 public final class Err<E, T> extends Result<T, E> {
 	/**
+	 * @param err initialize with this error type
 	 * @throws NullPointerException if <code>null</code>
 	 */
 	public Err(E err) {
@@ -27,11 +29,17 @@ public final class Err<E, T> extends Result<T, E> {
 		Objects.requireNonNull(err);
 	}
 
+	/**
+	 * @return <code>false</code>
+	 */
 	@Override
 	public boolean isOk() {
 		return false;
 	}
 
+	/**
+	 * @return <code>true</code>
+	 */
 	@Override
 	public boolean isErr() {
 		return true;

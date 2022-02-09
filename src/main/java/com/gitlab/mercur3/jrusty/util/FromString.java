@@ -1,16 +1,20 @@
-package io.andri.jrusty.util;
+package com.gitlab.mercur3.jrusty.util;
 
-import io.andri.jrusty.result.Err;
-import io.andri.jrusty.result.ErrorKind;
-import io.andri.jrusty.result.Ok;
-import io.andri.jrusty.result.Result;
+import com.gitlab.mercur3.jrusty.result.Err;
+import com.gitlab.mercur3.jrusty.result.ErrorKind;
+import com.gitlab.mercur3.jrusty.result.Ok;
+import com.gitlab.mercur3.jrusty.result.Result;
 
+/**
+ * String conversion utils
+ */
 public class FromString {
 	private FromString() {}
 
 	/**
 	 * Parses a <code>String</code> to <code>boolean</code>
 	 *
+	 * @param str string
 	 * @return <code>ErrorKind.FORMAT_ERROR</code> if the string is not valid
 	 * @see Boolean#parseBoolean(String)
 	 */
@@ -26,6 +30,8 @@ public class FromString {
 	/**
 	 * Parses a <code>String</code> to <code>byte</code> with the given radix
 	 *
+	 * @param str   string
+	 * @param radix radix
 	 * @return <code>ErrorKind.FORMAT_ERROR</code> if the string is not a valid number
 	 * @see Byte#parseByte(String, int)
 	 */
@@ -41,6 +47,7 @@ public class FromString {
 	/**
 	 * Parses a <code>String</code> to <code>byte</code> base 10
 	 *
+	 * @param str string
 	 * @see #parseByteWithRadix(String, int)
 	 */
 	public static Result<Byte, ErrorKind> parseByte(String str) {
@@ -50,6 +57,8 @@ public class FromString {
 	/**
 	 * Parses a <code>String</code> to <code>int</code> with the given radix
 	 *
+	 * @param str   string
+	 * @param radix radix
 	 * @return <code>ErrorKind.FORMAT_ERROR</code> if the string is not a valid number
 	 * @see Integer#parseInt(String, int)
 	 */
@@ -65,6 +74,7 @@ public class FromString {
 	/**
 	 * Parses a <code>String</code> to <code>int</code> base 10
 	 *
+	 * @param str string
 	 * @see #parseIntWithRadix(String, int)
 	 */
 	public static Result<Integer, ErrorKind> parseInt(String str) {
@@ -74,6 +84,8 @@ public class FromString {
 	/**
 	 * Parses a <code>String</code> to <code>long</code> with the given radix
 	 *
+	 * @param str   string
+	 * @param radix radix
 	 * @return <code>ErrorKind.FORMAT_ERROR</code> if the string is not a valid number
 	 * @see Long#parseLong(String, int)
 	 */
@@ -89,6 +101,7 @@ public class FromString {
 	/**
 	 * Parses a <code>String</code> to <code>long</code> base 10
 	 *
+	 * @param str string
 	 * @see #parseLongWithRadix(String, int)
 	 */
 	public static Result<Long, ErrorKind> parseLong(String str) {

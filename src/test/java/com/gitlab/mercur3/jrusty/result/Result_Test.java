@@ -1,4 +1,4 @@
-package io.andri.jrusty.result;
+package com.gitlab.mercur3.jrusty.result;
 
 import org.junit.jupiter.api.Test;
 
