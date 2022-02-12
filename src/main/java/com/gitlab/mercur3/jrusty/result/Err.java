@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * If the operation is not successful it should return <code>Err&lt;E&gt;</code>.
  *
- * <h3>Notes</h3>
+ * <h2>Notes</h2>
  * <ul>
  *     <li>
  * 			Neglect the signature <code>extends Result&lt;T, E&gt;</code> and <code>Err&lt;E, T&gt;</code>.

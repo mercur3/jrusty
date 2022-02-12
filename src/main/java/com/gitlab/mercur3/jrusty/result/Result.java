@@ -8,21 +8,21 @@ import java.util.function.Function;
  * and {@code Err}. If the instance is {@code Ok}, {@code err} is set to {@code null}. If the instance is
  * {@code Err}, {@code ok} is set to {@code null}.
  *
- * <h3>Equality</h3>
+ * <h2>Equality</h2>
  * 2 <code>Result</code>'s are equal if and only if one of the following is true:
  * <ol>
  *     <li>Both are <code>Ok&lt;?&gt;</code> and the content inside are also equal</li>
  *     <li>Both are <code>Err&lt;?&gt;</code> and the content inside are also equal</li>
  * </ol>
  *
- * <h3>Example</h3>
+ * <h2>Example</h2>
  * <pre>
- * public static Result<Boolean, ErrorKind> parseBoolean(String str) {
+ * public static Result&lt;Boolean, ErrorKind&gt; parseBoolean(String str) {
  *     try {
- *         return new Ok<>(Boolean.parseBoolean(str));
+ *         return new Ok&lt;&gt;(Boolean.parseBoolean(str));
  *     }
  *     catch (NumberFormatException e) {
- *         return new Err<>(ErrorKind.FORMAT_ERROR);
+ *         return new Err&lt;&gt;(ErrorKind.FORMAT_ERROR);
  *     }
  * }
  * </pre>
@@ -106,6 +106,7 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	 *
 	 * @param f   a function <code>E -> O</code>
 	 * @param <O> the new <code>err</code> type
+	 * @return the mapping
 	 */
 	public <O> Result<T, O> mapErr(Function<E, O> f) {
 		if (isErr()) {

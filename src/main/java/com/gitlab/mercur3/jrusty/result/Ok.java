@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * If operation is successful it should return <code>Ok&lt;T&gt;</code>.
  *
- * <h3>Notes</h3>
+ * <h2>Notes</h2>
  * <p>
  * Neglect the signature <code>Ok&lt;T, E&gt;</code>. Only {@code T} is used, {@code E} is needed
  * only in order to compile without warnings.

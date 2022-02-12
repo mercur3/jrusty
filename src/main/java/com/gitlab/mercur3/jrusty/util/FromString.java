@@ -48,6 +48,7 @@ public class FromString {
 	 * Parse a {@code String} to {@code byte} base 10
 	 *
 	 * @param str string
+	 * @return <code>ErrorKind.FORMAT_ERROR</code> if the string is not a valid number
 	 * @see #parseByteWithRadix(String, int)
 	 */
 	public static Result<Byte, ErrorKind> parseByte(String str) {
@@ -75,6 +76,7 @@ public class FromString {
 	 * Parse a {@code String} to {@code int} base 10
 	 *
 	 * @param str string
+	 * @return <code>ErrorKind.FORMAT_ERROR</code> if the string is not a valid number
 	 * @see #parseIntWithRadix(String, int)
 	 */
 	public static Result<Integer, ErrorKind> parseInt(String str) {
@@ -102,6 +104,7 @@ public class FromString {
 	 * Parse a {@code String} to {@code long} base 10
 	 *
 	 * @param str string
+	 * @return <code>ErrorKind.FORMAT_ERROR</code> if the string is not a valid number
 	 * @see #parseLongWithRadix(String, int)
 	 */
 	public static Result<Long, ErrorKind> parseLong(String str) {
