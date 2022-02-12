@@ -3,10 +3,15 @@ package com.gitlab.mercur3.jrusty.result;
 import java.util.Objects;
 
 /**
- * If operation is successful it must return <code>Ok&lt;T&gt;</code>.
- * <br><br>
- * <b>Note:</b> neglect the signature <code>&lt;T, E&lt;</code>. Only <code>T</code> is used,
- * <code>E</code> is needed only in order to compile without warnings.
+ * If operation is successful it should return <code>Ok&lt;T&gt;</code>.
+ *
+ * <h3>Notes</h3>
+ * <p>
+ * Neglect the signature <code>Ok&lt;T, E&gt;</code>. Only {@code T} is used, {@code E} is needed
+ * only in order to compile without warnings.
+ * </p>
+ *
+ * @see com.gitlab.mercur3.jrusty.result.Result
  */
 public final class Ok<T, E> extends Result<T, E> {
 	/**
@@ -34,10 +39,6 @@ public final class Ok<T, E> extends Result<T, E> {
 		return false;
 	}
 
-	/**
-	 * @param o other object
-	 * @return true if equal
-	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Ok<?, ?> other) {

@@ -6,13 +6,13 @@ import com.gitlab.mercur3.jrusty.result.Ok;
 import com.gitlab.mercur3.jrusty.result.Result;
 
 /**
- * String conversion utils
+ * From {@code String} conversion utils.
  */
 public class FromString {
 	private FromString() {}
 
 	/**
-	 * Parses a <code>String</code> to <code>boolean</code>
+	 * Parse a {@code String} to {@code boolean}.
 	 *
 	 * @param str string
 	 * @return <code>ErrorKind.FORMAT_ERROR</code> if the string is not valid
@@ -28,7 +28,7 @@ public class FromString {
 	}
 
 	/**
-	 * Parses a <code>String</code> to <code>byte</code> with the given radix
+	 * Parse a {@code String} to {@code byte} with the given radix
 	 *
 	 * @param str   string
 	 * @param radix radix
@@ -45,7 +45,7 @@ public class FromString {
 	}
 
 	/**
-	 * Parses a <code>String</code> to <code>byte</code> base 10
+	 * Parse a {@code String} to {@code byte} base 10
 	 *
 	 * @param str string
 	 * @see #parseByteWithRadix(String, int)
@@ -55,7 +55,7 @@ public class FromString {
 	}
 
 	/**
-	 * Parses a <code>String</code> to <code>int</code> with the given radix
+	 * Parse a {@code String} to {@code int} with the given radix
 	 *
 	 * @param str   string
 	 * @param radix radix
@@ -72,7 +72,7 @@ public class FromString {
 	}
 
 	/**
-	 * Parses a <code>String</code> to <code>int</code> base 10
+	 * Parse a {@code String} to {@code int} base 10
 	 *
 	 * @param str string
 	 * @see #parseIntWithRadix(String, int)
@@ -82,7 +82,7 @@ public class FromString {
 	}
 
 	/**
-	 * Parses a <code>String</code> to <code>long</code> with the given radix
+	 * Parse a {@code String} to {@code long} with the given radix
 	 *
 	 * @param str   string
 	 * @param radix radix
@@ -99,7 +99,7 @@ public class FromString {
 	}
 
 	/**
-	 * Parses a <code>String</code> to <code>long</code> base 10
+	 * Parse a {@code String} to {@code long} base 10
 	 *
 	 * @param str string
 	 * @see #parseLongWithRadix(String, int)

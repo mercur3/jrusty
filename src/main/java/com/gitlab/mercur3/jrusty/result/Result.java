@@ -4,19 +4,32 @@ import java.util.Optional;
 import java.util.function.Function;
 
 /**
- * Representation of Rust's <code>std::result::Result</code>. The only allowed subclasses are
- * <code>Ok</code> and <code>Err</code>. If the instance is <code>Ok</code>, <code>err</code> is set
- * to <code>null</code>. If the instance is <code>Err</code>, <code>ok</code> is set to
- * <code>null</code>.
- * <p>
+ * Representation of Rust's {@code std::result::Result}. The only allowed subclasses are {@code Ok}
+ * and {@code Err}. If the instance is {@code Ok}, {@code err} is set to {@code null}. If the instance is
+ * {@code Err}, {@code ok} is set to {@code null}.
+ *
+ * <h3>Equality</h3>
  * 2 <code>Result</code>'s are equal if and only if one of the following is true:
  * <ol>
  *     <li>Both are <code>Ok&lt;?&gt;</code> and the content inside are also equal</li>
  *     <li>Both are <code>Err&lt;?&gt;</code> and the content inside are also equal</li>
  * </ol>
  *
+ * <h3>Example</h3>
+ * <pre>
+ * public static Result<Boolean, ErrorKind> parseBoolean(String str) {
+ *     try {
+ *         return new Ok<>(Boolean.parseBoolean(str));
+ *     }
+ *     catch (NumberFormatException e) {
+ *         return new Err<>(ErrorKind.FORMAT_ERROR);
+ *     }
+ * }
+ * </pre>
+ *
  * @param <T> the type operation returns if it is <code>Ok</code>
  * @param <E> the type operation returns if it is <code>Err</code>
+ * @see <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>std::result::Result</code></a>
  */
 public sealed abstract class Result<T, E> permits Ok, Err {
 	private final T ok;
