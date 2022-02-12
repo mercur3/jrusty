@@ -10,9 +10,12 @@ package com.gitlab.mercur3.jrusty.panic;
  *         }
  *     }
  * </pre>
- *
+ * <p>
  * The above code declares an arbitrary function that is not implemented yet. It allows compilation,
  * but as soon as the function is called it should throw an {@code UnimplementedException}.
+ * </p>
+ *
+ * @see <a href="https://doc.rust-lang.org/std/macro.unimplemented.html"><code>unimplemented!()</code></a>
  */
 public final class UnimplementedException extends UnsupportedOperationException {
 	/**
