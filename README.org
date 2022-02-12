@@ -1,18 +1,36 @@
 * jrusty
+
 What if Java was more like Rust?
 
 ** What this library provides
+
 - A =Result= class following the specification of Rust's =std::result::Result= with 1 of the 2
   possible types: =Ok= or =Err=.
 - Sane conversions from =java.lang.String= to =byte=, =int=, =long= without the need for:
 
-  #+begin_src java
-    try {
-        /* assignment */ Integer.parseInt(someQuestionableStringWeGotAsInput);
-    }
-    catch (NumberFormatException ex) {
-        // do something
-    }
-  #+end_src
+#+begin_src java
+try {
+    /* assignment */ Integer.parseInt(someQuestionableStringWeGotAsInput);
+}
+catch (NumberFormatException ex) {
+    // do something
+}
+#+end_src
 
-- =null= safety for everything library provides.
+- =null= safety for everything in this library.
+
+** Usage
+
+Put this in your =pom.xml=:
+
+#+begin_src
+<dependencies>
+    <!-- other dependecies -->
+	<dependency>
+		<groupId>com.gitlab.mercur3</groupId>
+		<artifactId>jrusty</artifactId>
+		<version>RELEASE</version>
+	</dependency>
+    <!-- other dependecies -->
+</dependencies>
+#+end_src
