@@ -60,7 +60,7 @@ class Result_Test {
 		assertThrows(IllegalStateException.class, x::unwrap);
 		assertThrows(RuntimeException.class, () -> x.expect(ERROR_MESSAGE));
 		assertEquals(x.map(ok -> ""), new Err<>(str));
-		assertEquals(x.mapErr(err -> ErrorKind.EMPTY), new Err<>(ErrorKind.EMPTY));
+		assertEquals(x.mapErr(err -> Empty.UNIT), new Err<>(Empty.UNIT));
 		assertEquals(x.mapOr(isErr, String::valueOf), isErr);
 		assertEquals(x.mapOrElse(this::strToDefaultInt, ok -> ok), -1);
 		assertEquals(x.unwrapOr(1), 1);

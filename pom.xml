@@ -6,7 +6,7 @@
 
 	<groupId>com.gitlab.mercur3</groupId>
 	<artifactId>jrusty</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<packaging>jar</packaging>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>What if Java was a bit more like Rust</description>

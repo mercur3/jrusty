@@ -4,8 +4,6 @@ package com.gitlab.mercur3.jrusty.result;
  * Some error kinds
  */
 public enum ErrorKind {
-	/** Rust's <code>()</code> */
-	EMPTY,
 	/** Generic error caused by an IO operation */
 	IO_ERROR,
 	/** Format error */
