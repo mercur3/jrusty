@@ -5,8 +5,8 @@ import java.util.function.Function;
 
 /**
  * Representation of Rust's {@code std::result::Result}. The only allowed subclasses are {@code Ok}
- * and {@code Err}. If the instance is {@code Ok}, {@code err} is set to {@code null}. If the instance is
- * {@code Err}, {@code ok} is set to {@code null}.
+ * and {@code Err}. If the instance is {@code Ok}, {@code err} is set to {@code null}. If the
+ * instance is {@code Err}, {@code ok} is set to {@code null}.
  *
  * <h2>Equality</h2>
  * 2 <code>Result</code>'s are equal if and only if one of the following is true:
@@ -86,7 +86,7 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
-	 * Maps a <code>Result&lt;T, E&gt;</code> to <code>Result&lt;T, E&gt;</code> by applying the
+	 * Maps a <code>Result&lt;T, E&gt;</code> to <code>Result&lt;U, E&gt;</code> by applying the
 	 * function. In any case the value of <code>err</code> is left untouched.
 	 *
 	 * @param mapper a function <code>T -> U</code>
@@ -133,6 +133,10 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	}
 
 	/**
+	 * Maps a <code>Result&lt;T, E&gt;</code> to <code>U</code> by applying the function
+	 * <code>f</code> to a present <code>Ok</code> value or if {@code Err} returns the default value
+	 * <code>defaultValue</code>.
+	 *
 	 * @param <U>          the associated type
 	 * @param defaultValue the default value
 	 * @param f            the function

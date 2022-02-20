@@ -16,7 +16,7 @@ import java.util.Objects;
 public final class Ok<T, E> extends Result<T, E> {
 	/**
 	 * @param ok <code>Ok</code> type
-	 * @throws NullPointerException if <code>null</code>
+	 * @throws NullPointerException if {@code null}
 	 */
 	public Ok(T ok) {
 		super(ok, null);
@@ -24,7 +24,7 @@ public final class Ok<T, E> extends Result<T, E> {
 	}
 
 	/**
-	 * @return <code>true</code>
+	 * @return {@code true}
 	 */
 	@Override
 	public boolean isOk() {
@@ -32,7 +32,7 @@ public final class Ok<T, E> extends Result<T, E> {
 	}
 
 	/**
-	 * @return <code>false</code>
+	 * @return {@code false}
 	 */
 	@Override
 	public boolean isErr() {

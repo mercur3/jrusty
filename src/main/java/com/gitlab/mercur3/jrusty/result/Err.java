@@ -8,16 +8,17 @@ import java.util.Objects;
  * <h2>Notes</h2>
  * <ul>
  *     <li>
- * 			Neglect the signature <code>extends Result&lt;T, E&gt;</code> and <code>Err&lt;E, T&gt;</code>.
+ * 			Neglect the signature <code>extends Result&lt;T, E&gt;</code> and
+ * 			<code>Err&lt;E, T&gt;</code>.
  * 			Only {@code E} in {@code Err} is used, {@code T} is needed only in order to compile
  * 			without warnings.
  *     </li>
  *     <li>
  * 			<code>Err&lt;E, T&gt;</code> is a <i>HACK</i> in order to circumnavigate the problem
  * 			that we are extending <code>Result&lt;T, E&gt;</code>. Compiler maps {@code E} of
- *            {@code Err} to {@code T} of {@code Result} and {@code T} of {@code Err} to {@code E} of
- *            {@code Result}. The constructor accepts only 1 parameter therefore it is assigned to
- *            {@code E} of {@code Err} and {@code Result} which is what we wanted.
+ *            {@code Err} to {@code T} of {@code Result} and {@code T} of {@code Err} to {@code E}
+ *            of {@code Result}. The constructor accepts only 1 parameter therefore it is assigned
+ *            to {@code E} of {@code Err} and {@code Result} which is what we wanted.
  *     </li>
  * </ul>
  *
@@ -34,7 +35,7 @@ public final class Err<E, T> extends Result<T, E> {
 	}
 
 	/**
-	 * @return <code>false</code>
+	 * @return {@code false}
 	 */
 	@Override
 	public boolean isOk() {
@@ -42,7 +43,7 @@ public final class Err<E, T> extends Result<T, E> {
 	}
 
 	/**
-	 * @return <code>true</code>
+	 * @return {@code true}
 	 */
 	@Override
 	public boolean isErr() {

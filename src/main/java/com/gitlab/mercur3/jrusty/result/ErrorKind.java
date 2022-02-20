@@ -1,7 +1,7 @@
 package com.gitlab.mercur3.jrusty.result;
 
 /**
- * Some error kinds
+ * Some error kinds.
  */
 public enum ErrorKind {
 	/** Generic error caused by an IO operation */
