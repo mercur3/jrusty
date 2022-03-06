@@ -21,7 +21,7 @@ catch (NumberFormatException ex) {
 
 ** Usage
 
-Put this in your =pom.xml=:
+*** Maven
 
 #+begin_src
 <dependencies>
@@ -29,8 +29,16 @@ Put this in your =pom.xml=:
 	<dependency>
 		<groupId>com.gitlab.mercur3</groupId>
 		<artifactId>jrusty</artifactId>
-		<version>RELEASE</version>
+		<version>XXX</version>
 	</dependency>
     <!-- other dependecies -->
 </dependencies>
+#+end_src
+
+*** Gradle
+
+#+begin_src
+dependencies {
+	implementation 'com.gitlab.mercur3:jrusty:XXX'
+}
 #+end_src
