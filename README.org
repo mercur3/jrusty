@@ -25,13 +25,12 @@ catch (NumberFormatException ex) {
 
 #+begin_src
 <dependencies>
-    <!-- other dependecies -->
 	<dependency>
 		<groupId>com.gitlab.mercur3</groupId>
 		<artifactId>jrusty</artifactId>
+        <!-- the version you want to use, but prefer the latest -->
 		<version>XXX</version>
 	</dependency>
-    <!-- other dependecies -->
 </dependencies>
 #+end_src
 
@@ -39,6 +38,7 @@ catch (NumberFormatException ex) {
 
 #+begin_src
 dependencies {
+    // the version you want to use, but prefer the latest
 	implementation 'com.gitlab.mercur3:jrusty:XXX'
 }
 #+end_src
