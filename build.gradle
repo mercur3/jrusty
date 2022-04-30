@@ -1,7 +1,8 @@
 plugins {
-    id "java"
+    id "java-library"
     id "maven-publish"
     id "jacoco"
+    id "signing"
 }
 
 repositories {
@@ -15,7 +16,6 @@ dependencies {
 
 group = "com.gitlab.mercur3"
 version = "1.0.2"
-description = "com.gitlab.mercur3:jrusty"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 java {
@@ -23,12 +23,8 @@ java {
     withJavadocJar()
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
 
 test {
@@ -53,6 +49,56 @@ jacocoTestReport {
     }
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = group
+            artifactId = Project.getName()
+            from components.java
+
+            pom {
+                name = "${groupId}:${artifactId}"
+                description = "What if Java was a little bit more like Rust?"
+                url = "https://gitlab.com/mercur3/jrusty"
+                licenses {
+                    license {
+                        name = "BSD 3-Clause \"New\" or \"Revised\" license"
+                        url = "https://opensource.org/licenses/BSD-3-Clause"
+                    }
+                }
+                developers {
+                    developer {
+                        name = "Andri Reveli"
+                        email = "reveliandri@gmail.com"
+                        organization = "com.gitlab.mercur3"
+                        organizationUrl = "https://gitlab.com/mercur3"
+                    }
+                }
+                scm {
+                    url = "https://gitlab.com/mercur3.git"
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "ossrh"
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            credentials {
+                username = "mercur3"
+                password = System.getenv("SYSTEM_ACCESSTOKEN")
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption("html5", true)
+    }
 }
