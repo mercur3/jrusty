@@ -5,13 +5,13 @@ pool:
 stages:
   - stage: Test
     jobs:
-      - job: test-alpine
+      - job: test_alpine
         displayName: Test on Alpine Linux
         container: eclipse-temurin:17-jdk-alpine
         steps:
           - bash: |
               ./gradlew test
-      - job: test-ubuntu
+      - job: test_ubuntu
         displayName: Test on Ubuntu
         container: eclipse-temurin:17-jdk-focal
         steps:
