@@ -1,6 +1,7 @@
 plugins {
     id "java"
     id "maven-publish"
+    id "jacoco"
 }
 
 repositories {
@@ -27,6 +28,28 @@ publishing {
         maven(MavenPublication) {
             from(components.java)
         }
+    }
+}
+
+test {
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/panic/*Exception.class",
+                    "**/result/ErrorKind.class",
+            ])
+        }))
     }
 }
 
