@@ -15,8 +15,9 @@ dependencies {
 }
 
 group = "com.gitlab.mercur3"
-version = "1.0.2"
+version = "1.0.3"
 java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 
 java {
 	withSourcesJar()
@@ -87,7 +88,7 @@ publishing {
 			url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
 			credentials {
 				username = "mercur3"
-				password = System.getenv("SYSTEM_ACCESSTOKEN")
+				password = project.properties["password"]
 			}
 		}
 	}

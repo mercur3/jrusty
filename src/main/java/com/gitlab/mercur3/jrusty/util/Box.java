@@ -13,7 +13,7 @@ package com.gitlab.mercur3.jrusty.util;
  *
  *     int main() {
  *         int x = 0;
- *         point_to_5(&x);
+ *         point_to_5(&amp;x);
  *
  *         assert(x != 0);
  *         assert(x == 5);
