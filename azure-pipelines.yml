@@ -5,24 +5,22 @@ pool:
 stages:
   - stage: Test
     jobs:
-#      - job: test_alpine
-#        displayName: Test on Alpine Linux
-#        container: eclipse-temurin:17-jdk-alpine
-#        steps:
-#          - bash: |
-#              ./gradlew test
       - job: test_ubuntu
         displayName: Test on Ubuntu
         container: eclipse-temurin:17-jdk-focal
         steps:
           - bash: |
               ./gradlew test
+          - task: UseDotNet@2
+            displayName: "Use .NET Core sdk"
+            inputs:
+              version: 6.0.x
+              includePreviewVersions: true
           - task: PublishCodeCoverageResults@1
             displayName: "Code coverage"
             inputs:
               codeCoverageTool: "JaCoCo"
               summaryFileLocation: $(System.DefaultWorkingDirectory)/build/reports/jacoco/test/jacocoTestReport.xml
-              pathToSources: $(System.DefaultWorkingDirectory)/src/main/java/com/gitlab/mercur3/jrusty
               reportDirectory: $(System.DefaultWorkingDirectory)/build/reports/jacoco/test/html
               #additionalCodeCoverageFiles: # Optional
               failIfCoverageEmpty: true
