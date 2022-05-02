@@ -8,10 +8,10 @@
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
   <component name="MavenProjectsManager">
-    <option name="originalFiles">
-      <list>
+    <option name="ignoredFiles">
+      <set>
         <option value="$PROJECT_DIR$/pom.xml" />
-      </list>
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="openjdk-17 (2)" project-jdk-type="JavaSDK">
