@@ -5,8 +5,8 @@ pool:
 stages:
   - stage: Test
     jobs:
-      - job: test_ubuntu
-        displayName: Test on Ubuntu
+      - job: eclipse-temurin-17
+        displayName: Test on Ubuntu with Eclipse Temurin 17
         container: eclipse-temurin:17-jdk-focal
         steps:
           - bash: |
@@ -24,3 +24,21 @@ stages:
               reportDirectory: $(System.DefaultWorkingDirectory)/build/reports/jacoco/test/html
               #additionalCodeCoverageFiles: # Optional
               failIfCoverageEmpty: true
+      - job: eclipse-temurin-18
+        displayName: Test on Ubuntu with Eclipse Temurin 18
+        container: eclipse-temurin:18-jdk-focal
+        steps:
+          - bash: |
+              ./gradlew test
+      - job: amazon-correto-17
+        displayName: Test on Amazon Correto 17
+        container: amazoncorreto:17
+        steps:
+          - bash: |
+              ./gradlew test
+      - job: amazon-correto-18
+        displayName: Test on Amazon Correto 18
+        container: amazoncorreto:18
+        steps:
+          - bash: |
+              ./gradlew test
