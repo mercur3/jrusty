@@ -29,9 +29,12 @@ tasks.withType(JavaCompile) {
 }
 
 test {
-	maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+	maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2)
 	useJUnitPlatform()
 	finalizedBy jacocoTestReport
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
 jacocoTestReport {

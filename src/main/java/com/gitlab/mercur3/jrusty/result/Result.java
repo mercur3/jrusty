@@ -61,13 +61,25 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	/**
 	 * @param msg message
 	 * @return the value if <code>Ok</code>
-	 * @throws RuntimeException with the specific message if <code>Err</code>
+	 * @throws IllegalStateException with the specific message if <code>Err</code>
 	 */
 	public T expect(String msg) {
 		if (isOk()) {
 			return ok;
 		}
-		throw new RuntimeException(msg);
+		throw new IllegalStateException(msg);
+	}
+
+	/**
+	 * @return the containing @{code Err} value or throws a runtime exception with the specified
+	 * message @{code msg}.
+	 * @throws IllegalStateException with the specific message if @{code Ok}
+	 */
+	public E expectErr(String msg) {
+		if (isErr()) {
+			return err;
+		}
+		throw new IllegalStateException(msg);
 	}
 
 	/**
@@ -156,9 +168,20 @@ public sealed abstract class Result<T, E> permits Ok, Err {
 	 */
 	public T unwrap() {
 		if (isErr()) {
-			throw new IllegalStateException("Trying to access value from a result that is in error");
+			throw new IllegalStateException("Trying to access value from a result that is error");
 		}
 		return ok;
+	}
+
+	/**
+	 * @return the contained @{code Err} value.
+	 * @throws IllegalStateException if @{code Ok}
+	 */
+	public E unwrapErr() {
+		if (isErr()) {
+			return err;
+		}
+		throw new IllegalStateException("Trying to access value from a result that is ok");
 	}
 
 	/**

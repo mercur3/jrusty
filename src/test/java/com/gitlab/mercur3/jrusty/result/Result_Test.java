@@ -38,11 +38,17 @@ class Result_Test {
 		assertEquals(x.ok(), Optional.of(str));
 		assertEquals(x.err(), Optional.empty());
 		assertEquals(x.expect(ERROR_MESSAGE), str);
+		assertThrowsExactly(
+				IllegalStateException.class,
+				() -> x.expectErr(ERROR_MESSAGE),
+				ERROR_MESSAGE
+		);
 		assertEquals(x.map(ok -> 1), new Ok<>(1));
 		assertEquals(x.mapErr(err -> ErrorKind.FORMAT_ERROR), new Ok<>(str));
 		assertEquals(x.mapOr(-1, String::length), str.length());
 		assertEquals(x.mapOrElse((err -> -1), String::length), str.length());
 		assertEquals(x.unwrap(), str);
+		assertThrowsExactly(IllegalStateException.class, x::unwrapErr);
 		assertEquals(x.unwrapOr(""), str);
 		assertEquals(x.unwrapOrElse(Result_Test::__toString), str);
 	}
@@ -63,6 +69,8 @@ class Result_Test {
 		assertEquals(x.mapErr(err -> Empty.UNIT), new Err<>(Empty.UNIT));
 		assertEquals(x.mapOr(isErr, String::valueOf), isErr);
 		assertEquals(x.mapOrElse(this::strToDefaultInt, ok -> ok), -1);
+		assertEquals(str, x.expectErr("oops!"));
+		assertEquals(str, x.unwrapErr());
 		assertEquals(x.unwrapOr(1), 1);
 		assertEquals(x.unwrapOrElse(Result_Test::__length), str.length());
 	}
