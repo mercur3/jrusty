@@ -10,7 +10,7 @@ stages:
         container: eclipse-temurin:17-jdk-focal
         steps:
           - bash: |
-              ./gradlew test
+              ./mvnw test
           - task: UseDotNet@2
             displayName: "Use .NET Core sdk"
             inputs:
@@ -29,16 +29,16 @@ stages:
         container: eclipse-temurin:18-jdk-focal
         steps:
           - bash: |
-              ./gradlew test
+              ./mvnw test
       - job: amazon_corretto_17
         displayName: Test on Amazon Corretto 17
         container: amazoncorretto:17
         steps:
           - bash: |
-              ./gradlew test
+              ./mvnw test
       - job: amazon_correto_18
         displayName: Test on Amazon Corretto 18
         container: amazoncorretto:18
         steps:
           - bash: |
-              ./gradlew test
+              ./mvnw test
