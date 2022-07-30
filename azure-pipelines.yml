@@ -20,8 +20,8 @@ stages:
             displayName: "Code coverage"
             inputs:
               codeCoverageTool: "JaCoCo"
-              summaryFileLocation: $(System.DefaultWorkingDirectory)/build/reports/jacoco/test/jacocoTestReport.xml
-              reportDirectory: $(System.DefaultWorkingDirectory)/build/reports/jacoco/test/html
+              summaryFileLocation: $(System.DefaultWorkingDirectory)/target/site/jacoco/jacoco.xml
+              reportDirectory: $(System.DefaultWorkingDirectory)/target/site/jacoco
               #additionalCodeCoverageFiles: # Optional
               failIfCoverageEmpty: true
       - job: eclipse_temurin_18
