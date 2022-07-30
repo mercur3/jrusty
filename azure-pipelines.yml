@@ -30,15 +30,15 @@ stages:
         steps:
           - bash: |
               ./gradlew test
-      - job: amazon_correto_17
-        displayName: Test on Amazon Correto 17
-        container: amazoncorreto:17
+      - job: amazon_corretto_17
+        displayName: Test on Amazon Corretto 17
+        container: amazoncorretto:17
         steps:
           - bash: |
               ./gradlew test
       - job: amazon_correto_18
-        displayName: Test on Amazon Correto 18
-        container: amazoncorreto:18
+        displayName: Test on Amazon Corretto 18
+        container: amazoncorretto:18
         steps:
           - bash: |
               ./gradlew test
