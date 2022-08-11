@@ -36,11 +36,13 @@ stages:
         displayName: Test on Amazon Corretto 17
         steps:
           - bash: |
+              sed "s/__version__/amazoncorretto:17" -i Dockerfile.amazoncorretto
               docker build -t project -f Dockerfile.amazoncorretto .
               docker run project bash -c "cd /opt/project && ./mvnw test"
       - job: amazon_correto_18
         displayName: Test on Amazon Corretto 18
-        container: amazoncorretto:18
         steps:
           - bash: |
-              ./mvnw test
+              sed "s/__version__/amazoncorretto:18" -i Dockerfile.amazoncorretto
+              docker build -t project -f Dockerfile.amazoncorretto .
+              docker run project bash -c "cd /opt/project && ./mvnw test"

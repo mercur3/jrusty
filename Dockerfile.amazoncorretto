@@ -1,3 +1,2 @@
-FROM amazoncorretto:18
+FROM __version__
 ADD . /opt/project
-
