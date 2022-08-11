@@ -36,13 +36,9 @@ stages:
         displayName: Test on Amazon Corretto 17
         steps:
           - bash: |
-              echo "Building the container\n"
-              docker-compose up -f docker-compose-amazon.yml -d
-
-              echo "------------\n"
-
-              echo "Executing command\n"
-              docker-compose exec -it project bash -c "cd /opt/project && ./mvnw test || true"
+              docker pull amazoncorretto:18
+              docker container create amazoncorretto:18 --name project -v "./:/opt/project"
+              docker run -it project bash "cd /opt/project && ./mvnw test"
       - job: amazon_correto_18
         displayName: Test on Amazon Corretto 18
         container: amazoncorretto:18
