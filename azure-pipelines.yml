@@ -36,7 +36,7 @@ stages:
         displayName: Test on Amazon Corretto 17
         steps:
           - bash: |
-              docker-compose up -f docker-compose-amazon.yml
+              docker-compose up -f docker-compose-amazon.yml -d
               docker exec project sh -c "cd /opt/project && ./mvnw test"
       - job: amazon_correto_18
         displayName: Test on Amazon Corretto 18
