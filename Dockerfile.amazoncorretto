@@ -1,2 +1,3 @@
-FROM amazoncorretto:17
+FROM alpine
 ADD . /opt/project
+
