@@ -37,8 +37,8 @@ stages:
         steps:
           - bash: |
               docker pull amazoncorretto:18
-              docker container create amazoncorretto:18 --name project -v "./:/opt/project"
-              docker run project bash "cd /opt/project && ./mvnw test"
+#              docker container create amazoncorretto:18 --name project -v "./:/opt/project"
+              docker run amazoncorretto:18 -v "./:/opt/project" bash "cd /opt/project && ./mvnw test"
       - job: amazon_correto_18
         displayName: Test on Amazon Corretto 18
         container: amazoncorretto:18
