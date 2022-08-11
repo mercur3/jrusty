@@ -36,7 +36,7 @@ stages:
         displayName: Test on Amazon Corretto 17
         steps:
           - bash: |
-              docker build -t project -f Dockerfile.amazoncorreto .
+              docker build -t project -f Dockerfile.amazoncorretto .
               docker run project bash "cd /opt/project && ./mvnw test"
       - job: amazon_correto_18
         displayName: Test on Amazon Corretto 18
