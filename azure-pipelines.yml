@@ -1,6 +1,7 @@
-# TODO uncomment
-#trigger:
-#  - master
+trigger:
+  - master
+  # TODO remove
+  - azure-pipelines-amazon
 pool:
   vmImage: ubuntu-latest
 stages:
