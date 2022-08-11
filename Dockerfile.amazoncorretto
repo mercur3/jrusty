@@ -1,3 +1,2 @@
 FROM amazoncorretto:17
-ADD ./ /opt/project
-
+ADD . /opt/project
