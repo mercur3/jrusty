@@ -1,5 +1,6 @@
-trigger:
-  - master
+# TODO uncomment
+#trigger:
+#  - master
 pool:
   vmImage: ubuntu-latest
 stages:
@@ -32,10 +33,10 @@ stages:
               ./mvnw test
       - job: amazon_corretto_17
         displayName: Test on Amazon Corretto 17
-        container: amazoncorretto:17
         steps:
           - bash: |
-              ./mvnw test
+              docker-compose up -f docker-compose-amazon.yml
+              docker exec project sh -c "cd /opt/project && ./mvnw test"
       - job: amazon_correto_18
         displayName: Test on Amazon Corretto 18
         container: amazoncorretto:18
