@@ -1,7 +1,5 @@
 trigger:
   - master
-  # TODO remove
-  - azure-pipelines-amazon
 pool:
   vmImage: ubuntu-latest
 stages:
@@ -46,3 +44,4 @@ stages:
               sed "s/__version__/amazoncorretto:18/" -i Dockerfile.amazoncorretto
               docker build -t project -f Dockerfile.amazoncorretto .
               docker run project bash -c "cd /opt/project && ./mvnw test"
+
