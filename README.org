@@ -1,5 +1,7 @@
-* jrusty
+#+HTML: <a href="https://gitlab.com/mercur3/jrusty"><img src="https://img.shields.io/azure-devops/coverage/andrireveli/jrusty/6/master"></a>
+#+HTML: <a href="https://gitlab.com/mercur3/jrusty"><img src="https://dev.azure.com/andrireveli/jrusty/_apis/build/status/mercur3.jrusty?branchName=master"></a>
 
+* jrusty
 What if Java was more like Rust?
 
 ** What this library provides
