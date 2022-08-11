@@ -42,7 +42,7 @@ stages:
               echo "------------\n"
 
               echo "Executing command\n"
-              docker-compose exec -it project bash -c "cd /opt/project && ./mvnw test" || true
+              docker-compose exec -it project bash -c "cd /opt/project && ./mvnw test || true"
       - job: amazon_correto_18
         displayName: Test on Amazon Corretto 18
         container: amazoncorretto:18
