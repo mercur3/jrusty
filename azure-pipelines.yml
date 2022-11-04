@@ -24,9 +24,9 @@ stages:
               reportDirectory: $(System.DefaultWorkingDirectory)/target/site/jacoco
               #additionalCodeCoverageFiles: # Optional
               failIfCoverageEmpty: true
-      - job: eclipse_temurin_18
-        displayName: Test on Ubuntu with Eclipse Temurin 18
-        container: eclipse-temurin:18-jdk-focal
+      - job: eclipse_temurin_19
+        displayName: Test on Ubuntu with Eclipse Temurin 19
+        container: eclipse-temurin:19-jdk-focal
         steps:
           - bash: |
               ./mvnw test
@@ -37,11 +37,10 @@ stages:
               sed "s/__version__/amazoncorretto:17/" -i Dockerfile.amazoncorretto
               docker build -t project -f Dockerfile.amazoncorretto .
               docker run project bash -c "cd /opt/project && ./mvnw test"
-      - job: amazon_correto_18
-        displayName: Test on Amazon Corretto 18
+      - job: amazon_correto_19
+        displayName: Test on Amazon Corretto 19
         steps:
           - bash: |
-              sed "s/__version__/amazoncorretto:18/" -i Dockerfile.amazoncorretto
+              sed "s/__version__/amazoncorretto:19/" -i Dockerfile.amazoncorretto
               docker build -t project -f Dockerfile.amazoncorretto .
               docker run project bash -c "cd /opt/project && ./mvnw test"
-
