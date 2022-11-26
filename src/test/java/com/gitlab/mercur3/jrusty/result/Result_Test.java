@@ -1,11 +1,14 @@
 package com.gitlab.mercur3.jrusty.result;
 
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class Result_Test {
 	private static final String ERROR_MESSAGE = "An error has occurred";
 	private static final int DEFAULT_ERR_INT = -1;

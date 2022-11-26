@@ -1,10 +1,13 @@
 package com.gitlab.mercur3.jrusty.panic;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class UnimplementedException_Test {
 	private static void func1() {
 		throw new UnimplementedException();
