@@ -15,17 +15,28 @@ import java.util.function.Function;
  *     <li>Both are <code>Err&lt;?&gt;</code> and the content inside are also equal</li>
  * </ol>
  *
- * <h2>Example</h2>
- * <pre>
- * public static Result&lt;Boolean, ErrorKind&gt; parseBoolean(String str) {
+ * <h2>Examples</h2>
+ * <h3>Working around {@code try-catch}</h3>
+ * {@snippet :
+ * public static Result<Boolean, ErrorKind> parseBoolean(String str) {
  *     try {
- *         return new Ok&lt;&gt;(Boolean.parseBoolean(str));
+ *         return new Ok<>(Boolean.parseBoolean(str));
  *     }
  *     catch (NumberFormatException e) {
- *         return new Err&lt;&gt;(ErrorKind.FORMAT_ERROR);
+ *         return new Err<>(ErrorKind.FORMAT_ERROR);
  *     }
- * }
- * </pre>
+ * }}
+ *
+ * <h3>Pattern matching (Java >= 21)</h3>
+ * {@snippet :
+ * public static handleRes(Result<Integer, String> res) {
+ *     // Notice that the second type in the diamond operator (<>) is irrelevant, but we still need to write it. Also,
+ *     // the Err branch has the types in reverse order. Again, the second type is irrelevant and should not bother you.
+ *     switch (res) {
+ *         case Ok<Integer, String> ok -> System.out.println("Received number = " + ok.unwrap());
+ *         case Err<String, Integer> err -> System.err.println("Error message = " + err.unwrapErr());
+ *     }
+ * }}
  *
  * @param <T> the type operation returns if it is <code>Ok</code>
  * @param <E> the type operation returns if it is <code>Err</code>

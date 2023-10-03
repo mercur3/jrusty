@@ -10,9 +10,9 @@ pool:
 stages:
   - stage: Test
     jobs:
-      - job: eclipse_temurin_17
-        displayName: Test on Ubuntu with Eclipse Temurin 17
-        container: eclipse-temurin:17-jdk-focal
+      - job: eclipse_temurin_21
+        displayName: Test on Ubuntu with Eclipse Temurin 21
+        container: eclipse-temurin:21-jdk-focal
         steps:
           - bash: |
               ./mvnw test -T $(nproc)
@@ -31,23 +31,10 @@ stages:
               reportDirectory: $(System.DefaultWorkingDirectory)/target/site/jacoco
               #additionalCodeCoverageFiles: # Optional
               failIfCoverageEmpty: true
-      - job: eclipse_temurin_19
-        displayName: Test on Ubuntu with Eclipse Temurin 19
-        container: eclipse-temurin:19-jdk-focal
+      - job: amazon_corretto_21
+        displayName: Test on Amazon Corretto 21
         steps:
           - bash: |
-              ./mvnw test -T $(nproc)
-      - job: amazon_corretto_17
-        displayName: Test on Amazon Corretto 17
-        steps:
-          - bash: |
-              sed "s/__version__/amazoncorretto:17/" -i Dockerfile.amazoncorretto
-              docker build -t project -f Dockerfile.amazoncorretto .
-              docker run project bash -c "cd /opt/project && ./mvnw test -T $(nproc)"
-      - job: amazon_correto_19
-        displayName: Test on Amazon Corretto 19
-        steps:
-          - bash: |
-              sed "s/__version__/amazoncorretto:19/" -i Dockerfile.amazoncorretto
+              sed "s/__version__/amazoncorretto:21/" -i Dockerfile.amazoncorretto
               docker build -t project -f Dockerfile.amazoncorretto .
               docker run project bash -c "cd /opt/project && ./mvnw test -T $(nproc)"

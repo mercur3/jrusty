@@ -1,5 +1,6 @@
 package com.gitlab.mercur3.jrusty.result;
 
+import com.gitlab.mercur3.jrusty.panic.UnreachableException;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -124,6 +125,23 @@ class Result_Test {
 				"hello")));
 		assertEquals(res4.flatten(), new Ok<>(new Ok<>("hello")));
 		assertEquals(res4.flatten().flatten(), new Ok<>("hello"));
+	}
+
+	@Test
+	void pattern_matching_works() {
+		Result<String, Integer> ok = new Ok<>("alpha");
+		var out1 = switch (ok) {
+			case Ok<String, Integer> o -> "beta";
+			case Err<Integer, String> e -> "gamma";
+        };
+		assertEquals("beta", out1);
+
+		Result<String, Integer> err = new Err<>(1);
+		var out2 = switch (err) {
+			case Ok<String, Integer> o -> "beta";
+			case Err<Integer, String> e -> "gamma";
+		};
+		assertEquals("gamma", out2);
 	}
 
 	private int strToDefaultInt(String str) {

@@ -2,14 +2,13 @@ package com.gitlab.mercur3.jrusty.panic;
 
 /**
  * Indicates that code is <b>unimplemented</b>.
- *
- * <pre>
- *     class x {
- *         public void func() {
- *             throw new UnimplementedException();
- *         }
+ * {@snippet :
+ * class x {
+ *     public void func() {
+ *         throw new UnimplementedException();
  *     }
- * </pre>
+ * }}
+ *
  * <p>
  * The above code declares an arbitrary function that is not implemented yet. It allows compilation,
  * but as soon as the function is called it should throw an {@code UnimplementedException}.

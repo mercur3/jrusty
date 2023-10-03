@@ -6,7 +6,7 @@
 
 	<groupId>com.gitlab.mercur3</groupId>
 	<artifactId>jrusty</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<packaging>jar</packaging>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<description>What if Java was a bit more like Rust</description>
@@ -39,8 +39,8 @@
 	</dependencies>
 
 	<properties>
-		<maven.compiler.source>17</maven.compiler.source>
-		<maven.compiler.target>17</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -151,6 +151,15 @@
 					</excludes>
 				</configuration>
 		</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>21</source>
+					<target>21</target>
+				</configuration>
+				<version>3.11.0</version>
+			</plugin>
 		</plugins>
 	</build>
 </project>
