@@ -12,7 +12,7 @@ stages:
     jobs:
       - job: eclipse_temurin_21
         displayName: Test on Ubuntu with Eclipse Temurin 21
-        container: eclipse-temurin:21-jdk-focal
+        container: eclipse-temurin:21-jdk
         steps:
           - bash: |
               ./mvnw test -T $(nproc)
