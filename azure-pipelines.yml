@@ -31,10 +31,10 @@ stages:
               reportDirectory: $(System.DefaultWorkingDirectory)/target/site/jacoco
               #additionalCodeCoverageFiles: # Optional
               failIfCoverageEmpty: true
-      - job: amazon_corretto_21
+      - job: maven_3_amazoncorretto_21
         displayName: Test on Amazon Corretto 21
         steps:
           - bash: |
-              sed "s/__version__/amazoncorretto:21/" -i Dockerfile.amazoncorretto
+              sed "s/__version__/maven:3-amazoncorretto-21/" -i Dockerfile.amazoncorretto
               docker build -t project -f Dockerfile.amazoncorretto .
               docker run project bash -c "cd /opt/project && ./mvnw test -T $(nproc)"
