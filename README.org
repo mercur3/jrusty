@@ -28,7 +28,7 @@ catch (NumberFormatException ex) {
 #+begin_src xml
 <dependencies>
 	<dependency>
-		<groupId>com.gitlab.mercur3</groupId>
+		<groupId>io.github.mercur3</groupId>
 		<artifactId>jrusty</artifactId>
         <!-- the version you want to use, but prefer the latest -->
 		<version>XXX</version>
@@ -41,7 +41,7 @@ catch (NumberFormatException ex) {
 #+begin_src groovy
 dependencies {
     // the version you want to use, but prefer the latest
-	implementation 'com.gitlab.mercur3:jrusty:XXX'
+	implementation 'io.github.mercur3:jrusty:XXX'
 }
 #+end_src
 
