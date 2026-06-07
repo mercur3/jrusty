@@ -10,12 +10,12 @@ pool:
 stages:
   - stage: Test
     jobs:
-      - job: eclipse_temurin_21
-        displayName: Test on Ubuntu with Eclipse Temurin 21
-        container: eclipse-temurin:21-jdk
+      - job: eclipse_temurin_25
+        displayName: Test on Ubuntu with Eclipse Temurin 25
+        container: eclipse-temurin:25-jdk
         steps:
           - bash: |
-              ./mvnw test -T $(nproc)
+              ./mvnw test -T $(nproc) -ntp
           - task: UseDotNet@2
             displayName: "Use .NET Core sdk"
             condition: not(eq(variables['Build.Reason'], 'PullRequest'))
@@ -31,10 +31,10 @@ stages:
               reportDirectory: $(System.DefaultWorkingDirectory)/target/site/jacoco
               #additionalCodeCoverageFiles: # Optional
               failIfCoverageEmpty: true
-      - job: maven_3_amazoncorretto_21
-        displayName: Test on Amazon Corretto 21
+      - job: maven_3_amazoncorretto_25
+        displayName: Test on Amazon Corretto 25
         steps:
           - bash: |
-              sed "s/__version__/maven:3-amazoncorretto-21/" -i Dockerfile.amazoncorretto
+              sed "s/__version__/maven:3-amazoncorretto-25/" -i Dockerfile.amazoncorretto
               docker build -t project -f Dockerfile.amazoncorretto .
-              docker run project bash -c "cd /opt/project && ./mvnw test -T $(nproc)"
+              docker run project bash -c "cd /opt/project && mvn test -T $(nproc) -ntp"
